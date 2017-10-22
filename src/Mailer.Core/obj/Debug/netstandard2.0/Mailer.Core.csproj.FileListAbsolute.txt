@@ -1,0 +1,9 @@
+D:\Projekty\Mailer\src\Mailer.Core\bin\Debug\netstandard2.0\Mailer.Core.deps.json
+D:\Projekty\Mailer\src\Mailer.Core\bin\Debug\netstandard2.0\Mailer.Core.dll
+D:\Projekty\Mailer\src\Mailer.Core\bin\Debug\netstandard2.0\Mailer.Core.pdb
+D:\Projekty\Mailer\src\Mailer.Core\obj\Debug\netstandard2.0\Mailer.Core.csproj.CoreCompileInputs.cache
+D:\Projekty\Mailer\src\Mailer.Core\obj\Debug\netstandard2.0\Mailer.Core.AssemblyInfoInputs.cache
+D:\Projekty\Mailer\src\Mailer.Core\obj\Debug\netstandard2.0\Mailer.Core.AssemblyInfo.cs
+D:\Projekty\Mailer\src\Mailer.Core\obj\Debug\netstandard2.0\Mailer.Core.dll
+D:\Projekty\Mailer\src\Mailer.Core\obj\Debug\netstandard2.0\Mailer.Core.pdb
+D:\Projekty\Mailer\src\Mailer.Core\obj\Debug\netstandard2.0\Mailer.Core.csprojResolveAssemblyReference.cache
