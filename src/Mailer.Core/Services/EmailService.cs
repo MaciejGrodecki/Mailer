@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Mailer.Core.ServerConnections;
 using Mailer.Core.Settings;
 using MailKit;
 using MailKit.Net.Imap;
@@ -8,28 +9,26 @@ namespace Mailer.Core.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly EmailConfig _emailConfig;
+        
+        private readonly ImapConnection imapConnection;
 
         public EmailService(IOptions<EmailConfig> emailConfig)
         {
-            _emailConfig = emailConfig.Value;
+            imapConnection = new ImapConnection(emailConfig);
         }
 
         public async Task<int> InboxCount()
         {
-            using (var client = new ImapClient())
+            using(var client = await imapConnection.ConnectAsync())
             {
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                await client.ConnectAsync(_emailConfig.ImapServerAddress, _emailConfig.ImapPort, true);
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
-                await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
-
                 var inbox = client.Inbox;
                 await inbox.OpenAsync(FolderAccess.ReadOnly);
 
                 return inbox.Count;
             }
         }
+
+        
 
 
     }

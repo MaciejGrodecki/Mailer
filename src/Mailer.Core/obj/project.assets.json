@@ -4099,9 +4099,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "D:\\Projekty\\Mailer\\src\\Mailer.Core\\Mailer.Core.csproj",
       "projectName": "Mailer.Core",
@@ -4137,23 +4134,23 @@
     "frameworks": {
       "netstandard2.0": {
         "dependencies": {
-          "MimeKit": {
-            "target": "Package",
-            "version": "1.18.1"
-          },
-          "MailKit": {
-            "target": "Package",
-            "version": "1.18.1.1"
-          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
             "version": "2.0.0",
             "autoReferenced": true
           },
+          "MailKit": {
+            "target": "Package",
+            "version": "1.18.1.1"
+          },
           "Microsoft.Extensions.Options": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "MimeKit": {
+            "target": "Package",
+            "version": "1.18.1"
           }
         },
         "imports": [

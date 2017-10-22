@@ -12923,9 +12923,6 @@
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "D:\\Projekty\\Mailer\\src\\Mailer.Api\\Mailer.Api.csproj",
       "projectName": "Mailer.Api",
@@ -12965,22 +12962,22 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "MimeKit": {
-            "target": "Package",
-            "version": "1.18.1"
-          },
-          "MailKit": {
-            "target": "Package",
-            "version": "1.18.1.1"
-          },
           "Microsoft.NETCore.App": {
             "target": "Package",
             "version": "2.0.0",
             "autoReferenced": true
           },
+          "MailKit": {
+            "target": "Package",
+            "version": "1.18.1.1"
+          },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "MimeKit": {
+            "target": "Package",
+            "version": "1.18.1"
           }
         },
         "imports": [
