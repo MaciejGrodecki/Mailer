@@ -1,3 +1,3 @@
 # Mailer
 
-Simple Email client with Mailkit library.
+Gmail API client with MailKit
