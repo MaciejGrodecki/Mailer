@@ -18,7 +18,7 @@ namespace Mailer.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var messages = await _inboxService.BrowseInboxMessages();
+            var messages = await _inboxService.BrowseInbox();
 
             return Json(messages);
         }
