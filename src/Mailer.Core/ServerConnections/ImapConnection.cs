@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Mailer.Core.ServerConnections
 {
-    public class ImapConnection
+    public class ImapConnection : IImapConnection
     {
         private readonly EmailConfig _emailConfig;
         public ImapConnection(IOptions<EmailConfig> emailConfig)

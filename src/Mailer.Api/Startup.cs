@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mailer.Core.Mappers;
+using Mailer.Core.ServerConnections;
 using Mailer.Core.Services;
 using Mailer.Core.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Mailer.Api
 {
@@ -28,9 +31,12 @@ namespace Mailer.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.Configure<EmailConfig>(Configuration.GetSection("EmailConfig"));
-            services.AddScoped<IEmailService, EmailService>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IImapConnection, ImapConnection>();
+            services.AddSingleton(AutoMapperConfig.Initialize());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

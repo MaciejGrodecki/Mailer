@@ -1,11 +1,12 @@
 using System;
+using MailKit;
 using MimeKit;
 
 namespace Mailer.Core.Domain
 {
     public class Email
     {
-        public Guid EmailId { get; protected set; }
+        public UniqueId EmailId { get; protected set; }
         public string Topic { get; protected set; }
         public string Body { get; protected set; }
         public Multipart Attachments { get; protected set; }
@@ -15,7 +16,7 @@ namespace Mailer.Core.Domain
         
         }
 
-        public Email(Guid emailId, string topic, string body)
+        public Email(UniqueId emailId, string topic, string body)
         {
             EmailId = emailId;
             SetTopic(topic);
@@ -23,7 +24,7 @@ namespace Mailer.Core.Domain
             
         }
 
-        public Email(Guid emailId, string topic, string body, Multipart attachments)
+        public Email(UniqueId emailId, string topic, string body, Multipart attachments)
         {
             EmailId = emailId;
             SetTopic(topic);
