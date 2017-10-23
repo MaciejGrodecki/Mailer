@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MailKit;
 using MimeKit;
 
@@ -9,7 +10,7 @@ namespace Mailer.Core.Domain
         public UniqueId EmailId { get; protected set; }
         public string Topic { get; protected set; }
         public string Body { get; protected set; }
-        public Multipart Attachments { get; protected set; }
+        public IEnumerable<MimeEntity> Attachments { get; protected set; }
 
         protected Email()
         {
@@ -24,7 +25,8 @@ namespace Mailer.Core.Domain
             
         }
 
-        public Email(UniqueId emailId, string topic, string body, Multipart attachments)
+        public Email(UniqueId emailId, string topic, string body, 
+            IEnumerable<MimeEntity> attachments)
         {
             EmailId = emailId;
             SetTopic(topic);

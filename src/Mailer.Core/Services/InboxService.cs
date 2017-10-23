@@ -39,7 +39,7 @@ namespace Mailer.Core.Services
                 {
                     var message = await client.Inbox.GetMessageAsync(uid);
                     inboxMessages.Add(
-                        new Email(uid, message.Subject, message.TextBody)
+                        new Email(uid, message.Subject, message.TextBody, message.Attachments)
                     );
                 }
 
