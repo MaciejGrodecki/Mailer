@@ -13,16 +13,38 @@ using MimeKit;
 
 namespace Mailer.Core.Services
 {
-    public class EmailService : IEmailService
+    public class InboxService : IInboxService
     {
         
         private readonly IImapConnection _imapConnection;
         private readonly IMapper _mapper;
 
-        public EmailService(IImapConnection imapConnection, IMapper mapper)
+        public InboxService(IImapConnection imapConnection, IMapper mapper)
         {
             _imapConnection = imapConnection;
             _mapper = mapper;
+        }
+
+        public async Task<ICollection<EmailDto>> BrowseInbox()
+        {
+            var inboxMessages = new List<Email>();
+            using(var client = await _imapConnection.ConnectAsync())
+            {
+                var inbox = client.Inbox;
+                await inbox.OpenAsync(FolderAccess.ReadOnly);
+
+                var uids = await inbox.SearchAsync(SearchQuery.All);
+
+                foreach(var uid in uids)
+                {
+                    var message = await client.Inbox.GetMessageAsync(uid);
+                    inboxMessages.Add(
+                        new Email(uid, message.Subject, message.TextBody)
+                    );
+                }
+
+                return _mapper.Map<ICollection<EmailDto>>(inboxMessages);
+            }
         }
 
         public async Task<int> GetInboxMessagesCount()

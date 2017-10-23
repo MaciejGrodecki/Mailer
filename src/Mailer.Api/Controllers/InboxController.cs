@@ -7,18 +7,27 @@ namespace Mailer.Api.Controllers
     [Route("")]
     public class InboxController : Controller
     {
-        private readonly IEmailService _emailService;
+        private readonly IInboxService _inboxService;
 
-        public InboxController(IEmailService emailService)
+        public InboxController(IInboxService inboxService)
         {
-            _emailService = emailService;
+            _inboxService = inboxService;
+        }
+
+        [Route("/api/inbox")]
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var messages = await _inboxService.BrowseInboxMessages();
+
+            return Json(messages);
         }
 
         [Route("/api/inbox/count")]
         [HttpGet]
         public async Task<IActionResult> GetMessageCount()
         {
-            int count = await _emailService.GetInboxMessagesCount();
+            int count = await _inboxService.GetInboxMessagesCount();
 
             return Json(count);
         }
@@ -27,7 +36,7 @@ namespace Mailer.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMessageTopics()
         {
-            var topics = await _emailService.GetInboxMessagesTopics();
+            var topics = await _inboxService.GetInboxMessagesTopics();
 
             return Json(topics);
         }
