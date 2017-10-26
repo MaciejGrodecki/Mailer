@@ -18,7 +18,7 @@ namespace Mailer.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var messages = await _inboxService.BrowseInbox();
+            var messages = await _inboxService.BrowseInboxAsync();
 
             return Json(messages);
         }
@@ -27,7 +27,7 @@ namespace Mailer.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMessageCount()
         {
-            int count = await _inboxService.GetInboxMessagesCount();
+            int count = await _inboxService.GetInboxMessagesCountAsync();
 
             return Json(count);
         }
@@ -36,9 +36,18 @@ namespace Mailer.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMessageTopics()
         {
-            var topics = await _inboxService.GetInboxMessagesTopics();
+            var topics = await _inboxService.GetInboxMessagesTopicsAsync();
 
             return Json(topics);
+        }
+
+        [Route("/api/inbox/unread/count")]
+        [HttpGet]
+        public async Task<IActionResult> GetUnreadMessagesCount()
+        {
+            int count = await _inboxService.GetNumberOfUnreadMessagesAsync();
+
+            return Json(count);
         }
     }
 }

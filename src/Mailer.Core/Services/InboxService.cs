@@ -25,7 +25,7 @@ namespace Mailer.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<ICollection<EmailDto>> BrowseInbox()
+        public async Task<ICollection<EmailDto>> BrowseInboxAsync()
         {
             var inboxMessages = new List<Email>();
             using(var client = await _imapConnection.ConnectAsync())
@@ -47,7 +47,7 @@ namespace Mailer.Core.Services
             }
         }
 
-        public async Task<int> GetInboxMessagesCount()
+        public async Task<int> GetInboxMessagesCountAsync()
         {
             using(var client = await _imapConnection.ConnectAsync())
             {
@@ -58,7 +58,7 @@ namespace Mailer.Core.Services
             }
         }
 
-        public async Task<ICollection<string>> GetInboxMessagesTopics()
+        public async Task<ICollection<string>> GetInboxMessagesTopicsAsync()
         {
             var inboxMessages = new List<string>();
             using(var client = await _imapConnection.ConnectAsync())
@@ -78,6 +78,18 @@ namespace Mailer.Core.Services
                 
             }
             
+        }
+
+        public async Task<int> GetNumberOfUnreadMessagesAsync()
+        {
+            using(var client = await _imapConnection.ConnectAsync())
+            {
+                var inbox = client.Inbox;
+                await inbox.OpenAsync(FolderAccess.ReadOnly);
+                
+                
+                return inbox.Unread;
+            }
         }
     }
 }

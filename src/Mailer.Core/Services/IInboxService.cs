@@ -7,9 +7,10 @@ namespace Mailer.Core.Services
 {
     public interface IInboxService
     {
-        Task<int> GetInboxMessagesCount();
-        Task<ICollection<EmailDto>> BrowseInbox();
-        Task<ICollection<string>> GetInboxMessagesTopics();
+        Task<int> GetInboxMessagesCountAsync();
+        Task<ICollection<EmailDto>> BrowseInboxAsync();
+        Task<ICollection<string>> GetInboxMessagesTopicsAsync();
+        Task<int> GetNumberOfUnreadMessagesAsync();
 
     }
 }

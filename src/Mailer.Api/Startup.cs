@@ -35,7 +35,9 @@ namespace Mailer.Api
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.Configure<EmailConfig>(Configuration.GetSection("EmailConfig"));
             services.AddTransient<IInboxService, InboxService>();
+            services.AddTransient<ISmtpService, SmtpService>();
             services.AddTransient<IImapConnection, ImapConnection>();
+            services.AddTransient<ISmtpConnection, SmtpConnection>();
             services.AddSingleton(AutoMapperConfig.Initialize());
         }
 

@@ -6,5 +6,8 @@ namespace Mailer.Core.Settings
         public int ImapPort { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public string SmtpServerAddress {get; set;}
+        public int SmtpPort { get; set; }
     }
 }
