@@ -25,5 +25,10 @@ namespace Mailer.Core.ServerConnections
 
             return client;
         }
+
+        public string GetEmailAddress()
+        {
+            return _emailConfig.UserName;
+        }
     }
 }

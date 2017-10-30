@@ -14,15 +14,16 @@ namespace Mailer.Core.Services
         }
 
 
-        public async Task SendMessage(string myAddress, string toAddress, 
+        public async Task SendMessage(string toAddress, 
             string subject, string body)
         {
+            
             var message = new MimeMessage();
             message.From.Add(
-                new MailboxAddress("Maciek", myAddress)
+                new MailboxAddress(_smtpConntection.GetEmailAddress(), _smtpConntection.GetEmailAddress())
             );
             message.To.Add(
-                new MailboxAddress("Maciek2", toAddress)
+                new MailboxAddress(toAddress, toAddress)
             );
 
             message.Subject = subject;

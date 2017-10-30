@@ -18,7 +18,7 @@ namespace Mailer.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Send([FromBody]SendMessage command)
         {
-            await _smtpService.SendMessage(command.MyAddress, command.ToAddress,
+            await _smtpService.SendMessage(command.ToAddress,
                 command.Subject, command.Body);
 
             return Created($"done",null);
