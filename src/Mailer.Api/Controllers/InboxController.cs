@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Mailer.Core.Services;
+using MailKit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mailer.Api.Controllers
@@ -48,6 +49,15 @@ namespace Mailer.Api.Controllers
             int count = await _inboxService.GetNumberOfUnreadMessagesAsync();
 
             return Json(count);
+        }
+
+        [Route("/api/inbox/{messageId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetMessage(uint messageId)
+        {
+            var message = await _inboxService.GetMessage(messageId);
+
+            return Json(message);
         }
     }
 }

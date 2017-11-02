@@ -6,7 +6,7 @@ namespace Mailer.Core.DTO
 {
     public class EmailDto
     {
-        public UniqueId EmailId { get; set; }
+        public uint EmailId { get; set; }
         public string Topic { get; set; }
         public string Body { get; set; }
         public IEnumerable<MimeEntity> Attachments { get; set; }

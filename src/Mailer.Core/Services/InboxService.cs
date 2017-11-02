@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Mailer.Core.Domain;
@@ -47,6 +48,7 @@ namespace Mailer.Core.Services
             }
         }
 
+
         public async Task<int> GetInboxMessagesCountAsync()
         {
             using(var client = await _imapConnection.ConnectAsync())
@@ -78,6 +80,27 @@ namespace Mailer.Core.Services
                 
             }
             
+        }
+
+        public async Task<EmailDto> GetMessage(uint id)
+        {
+            var emailMessage = new EmailDto();
+            UniqueId uid = new UniqueId(id);
+            using (var client = await _imapConnection.ConnectAsync())
+            {
+                var inbox = client.Inbox;
+                await inbox.OpenAsync(FolderAccess.ReadOnly);
+
+                var message = await client.Inbox.GetMessageAsync(uid);
+
+                emailMessage.Attachments = message.Attachments;
+                emailMessage.Body = message.TextBody;
+                emailMessage.EmailId = uid.Id;
+                emailMessage.Topic = message.Subject;
+
+            }
+
+            return emailMessage;
         }
 
         public async Task<int> GetNumberOfUnreadMessagesAsync()

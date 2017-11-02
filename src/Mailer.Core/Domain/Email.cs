@@ -7,7 +7,7 @@ namespace Mailer.Core.Domain
 {
     public class Email
     {
-        public UniqueId EmailId { get; protected set; }
+        public uint EmailId { get; protected set; }
         public string Topic { get; protected set; }
         public string Body { get; protected set; }
         public IEnumerable<MimeEntity> Attachments { get; protected set; }
@@ -19,7 +19,7 @@ namespace Mailer.Core.Domain
 
         public Email(UniqueId emailId, string topic, string body)
         {
-            EmailId = emailId;
+            EmailId = emailId.Id;
             SetTopic(topic);
             SetBody(body);
             
@@ -28,7 +28,7 @@ namespace Mailer.Core.Domain
         public Email(UniqueId emailId, string topic, string body, 
             IEnumerable<MimeEntity> attachments)
         {
-            EmailId = emailId;
+            EmailId = emailId.Id;
             SetTopic(topic);
             SetBody(body);
             Attachments = attachments;
