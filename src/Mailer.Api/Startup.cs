@@ -16,6 +16,7 @@ namespace Mailer.Api
 {
     public class Startup
     {
+        string _testSecret = null;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -23,6 +24,10 @@ namespace Mailer.Api
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+            if(env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
             Configuration = builder.Build();
         }
 
@@ -34,11 +39,13 @@ namespace Mailer.Api
             services.AddMvc()
                 .AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.Configure<EmailConfig>(Configuration.GetSection("EmailConfig"));
+            services.Configure<EmailSecrets>(Configuration.GetSection("EmailSecrets"));
             services.AddTransient<IInboxService, InboxService>();
             services.AddTransient<ISmtpService, SmtpService>();
             services.AddTransient<IImapConnection, ImapConnection>();
             services.AddTransient<ISmtpConnection, SmtpConnection>();
             services.AddSingleton(AutoMapperConfig.Initialize());
+            _testSecret = Configuration["Password"];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

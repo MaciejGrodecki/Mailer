@@ -8,10 +8,13 @@ namespace Mailer.Core.ServerConnections
     public class ImapConnection : IImapConnection
     {
         private readonly EmailConfig _emailConfig;
-        public ImapConnection(IOptions<EmailConfig> emailConfig)
+        private readonly EmailSecrets _emailSecrets;
+
+        public ImapConnection(IOptions<EmailConfig> emailConfig, IOptions<EmailSecrets> emailSecrets)
         {
             
             _emailConfig = emailConfig.Value;
+            _emailSecrets = emailSecrets.Value;
         }
 
 
@@ -20,7 +23,7 @@ namespace Mailer.Core.ServerConnections
             var client = new ImapClient();
             client.ServerCertificateValidationCallback = (s, c, h, e) => true;
             await client.ConnectAsync(_emailConfig.ImapServerAddress, _emailConfig.ImapPort, true);
-            await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+            await client.AuthenticateAsync(_emailConfig.UserName, _emailSecrets.Password);
             client.AuthenticationMechanisms.Remove("XOAUTH2");
 
 

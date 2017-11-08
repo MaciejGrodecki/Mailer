@@ -8,10 +8,12 @@ namespace Mailer.Core.ServerConnections
     public class SmtpConnection : ISmtpConnection
     {
         private readonly EmailConfig _emailConfig;
+        private readonly EmailSecrets _emailSecrets;
 
-        public SmtpConnection(IOptions<EmailConfig> emailConfig)
+        public SmtpConnection(IOptions<EmailConfig> emailConfig, IOptions<EmailSecrets> emailSecrets)
         {
             _emailConfig = emailConfig.Value;
+            _emailSecrets = emailSecrets.Value;
         }
 
         public async Task<SmtpClient> ConnectAsync()
@@ -21,7 +23,7 @@ namespace Mailer.Core.ServerConnections
 
             await client.ConnectAsync("smtp.gmail.com", 465, true);
             client.AuthenticationMechanisms.Remove("XOAUTH2");
-            await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+            await client.AuthenticateAsync(_emailConfig.UserName, _emailSecrets.Password);
 
             return client;
         }

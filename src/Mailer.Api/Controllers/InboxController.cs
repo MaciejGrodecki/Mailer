@@ -14,7 +14,17 @@ namespace Mailer.Api.Controllers
         {
             _inboxService = inboxService;
         }
+        /*
+        [Route("/api/result")]
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var messages = Startup._
 
+            return Json(messages);
+        }
+
+    */
         [Route("/api/inbox")]
         [HttpGet]
         public async Task<IActionResult> Get()
