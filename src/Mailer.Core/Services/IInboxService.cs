@@ -14,5 +14,6 @@ namespace Mailer.Core.Services
         Task<int> GetNumberOfUnreadMessagesAsync();
         Task<EmailDto> GetMessage(uint id);
 
+
     }
 }

@@ -114,5 +114,6 @@ namespace Mailer.Core.Services
                 return inbox.Unread;
             }
         }
+
     }
 }

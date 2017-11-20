@@ -16,7 +16,6 @@ namespace Mailer.Api
 {
     public class Startup
     {
-        string _testSecret = null;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -45,7 +44,6 @@ namespace Mailer.Api
             services.AddTransient<IImapConnection, ImapConnection>();
             services.AddTransient<ISmtpConnection, SmtpConnection>();
             services.AddSingleton(AutoMapperConfig.Initialize());
-            _testSecret = Configuration["Password"];
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
